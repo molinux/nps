@@ -78,55 +78,55 @@ the request body.
 ]
 ```
 
-<b>POST <code>/surveys</code></b> Criar uma nova pesquisa
+<b>POST <code>/surveys</code></b> To create a new survey
 
-Este endpoint precisa receber um título e uma descrição.
+This endpoint needs to receive a title and a description.
 
 ```node
-// Corpo da requisição
+// Request body
 {
-    title: "Empresa X",
-    description: "De 0 a 10, o quanto você recomenda a Empresa X?"
+    title: "X Corp.",
+    description: "From 0 to 10, how much would you recommend X Corp. ?"
 }
 ```
 
 ```node
-// Retorno
+// Return
 {
     id: "1f7f097c-5906-421e-8c3f-477798468e6b",
-    title: "Empresa X",
-    description: "De 0 a 10, o quanto você recomenda a Empresa X?",
-    created_at: "2021-02-26T03:17:27.000Z"
+    title: "X Corp.",
+    description: "From 0 to 10, how much would you recommend X Corp. ?"
+    created_at: "2021-04-14T03:17:27.000Z"
   }
 ```
 
-### ✉️ Envio de Email
+### ✉️ Email sending
 
-<b>POST <code>/sendMail</code></b> Envio de email contendo link para avaliação de empresa
+<b>POST <code>/sendMail</code></b> Sending an email containing a link to evalute the company
 
-Necessário conter um email válido e o id de uma pesquisa. 
+It is necessary to contain a valid email and a search id.
 
 ```node
-// Corpo da requisição
+// Request body
 {
-    email: "debora@gmail.com",
+    email: "molinuxbr@gmail.com",
     survey_id: "1f7f097c-5906-421e-8c3f-477798468e6b"
 }	
 ```
 
-Caso o usuário esteja recebendo o email pela primeira vez,
-o retorno será o seguinte:
+If the user is receiving the email for the first time,
+the return will be as the follows:
 
 ```node
 {
   id: "7df04a6a-fac6-443a-9249-c77363b42656",
   user_id: "39a3a2c9-1c33-415f-9ed0-3c8d6c3ba9f5",
   survey_id: "1f7f097c-5906-421e-8c3f-477798468e6b",
-  created_at: "2021-02-28T19:44:14.000Z"
+  created_at: "2021-04-14T19:44:14.000Z"
 }
 ```
 
-Caso já tenha recebido o email, mas ainda não tenha avaliado, será o seguinte:
+If the user has already received the email, but have not yet evaluated, it will be the following:
 
 ```node
 {
@@ -134,30 +134,30 @@ Caso já tenha recebido o email, mas ainda não tenha avaliado, será o seguinte
   user_id: "39a3a2c9-1c33-415f-9ed0-3c8d6c3ba9f5",
   survey_id: "1f7f097c-5906-421e-8c3f-477798468e6b",
   value: null,
-  created_at: "2021-02-28T19:44:14.000Z",
+  created_at: "2021-04-14T19:44:14.000Z",
   user: {
     id: "39a3a2c9-1c33-415f-9ed0-3c8d6c3ba9f5",
-    name: "Débora",
-    email: "debora@gmail.com",
-    created_at: "2021-02-28T19:36:15.000Z"
+    name: "Molinux",
+    email: "molinuxbr@gmail.com",
+    created_at: "2021-04-14T19:36:15.000Z"
   },
   survey: {
     id: "1f7f097c-5906-421e-8c3f-477798468e6b",
-    title: "Empresa X",
-    description: "De 0 a 10, o quanto você recomenda a Empresa X?",
+    title: "X Corp.",
+    description: "From 0 to 10, how much would you recommend X Corp. ?",
     created_at: "2021-02-26T03:17:27.000Z"
   }
 }
 ```
 
-### 🖩 Cálculo de NPS
+### 🖩 NPS Calculation
 
-<b>GET <code>/nps/:id_da_pesquisa</code></b> Cáculo de NPS, com base em avaliações de uma pesquisa
+<b>GET <code>/nps/:survey_id</code></b> NPS calculation, based on evaluations of a survey
 
-Para este endpoint, é necessário passar o id de uma pesquisa, na rota.
+For this endpoint, is necessary to inform a survey id on the route.
 
 ```node
-// Retorno
+// Return
 {
   detractors: 2,
   promoters: 4,
@@ -167,45 +167,46 @@ Para este endpoint, é necessário passar o id de uma pesquisa, na rota.
 }
 ```
 
-## 💿 Instalação
+## 💿 Instalation
 
-Para instalar este repositório, é necessário baixá-lo.
+To install this repository, you need to download it.
 
 ```bash
-git clone https://github.com/deboralbarros/nlw4.git
+git clone https://github.com/molinux/nps.git
 ```
 
-Depois, basta entrar na pasta do projeto e instalar as dependências:
+And them, you just need to install dependencies on de project folder:
 
 ```node
-cd nlw4
+cd nps
 
-// instalando com yarn
+// install with yarn
 yarn
 
-// instalando com npm
+//  install with npm
 npm install
 ```
 
-Então, depois de instaladas as dependências, é necessário rodar as migrations:
+After installed the dependencies, you need to run the migrations:
 
 ```node
-// com yarn
+// with yarn
 yarn typeorm migration:run
 
-// com npm
+// with npm
 npm run typeorm migration:run
 ```
 
-Antes de rodar, é necessário criar um arquivo <code>.env</code> na raiz do projeto para que
-a funcionalidade de avaliação funcione. Dentro deste arquivo, coloque:
+Before running, it is necessary to create a <code>.env</code> file at the root of the project
+so that the evaluation functionality works. Inside this file, place:
+
 ```angular2html
 URL_MAIL=http://localhost:3333/answers
 ```
 
-E agora, para rodar, basta dar <code>yarn dev</code> que a aplicação estará rodando em [localhost:3333](http://localhost:3333).
+And now, to run, just give <code>yarn dev</code> and the application will be running in [localhost:3333](http://localhost:3333).
 
-## ⚙️ Tecnologias Utilizadas
+## ⚙️ Technologies used in this project
 
 * [Node.js](https://nodejs.org/en/)
 * [Express](https://expressjs.com/pt-br/)
