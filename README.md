@@ -10,72 +10,70 @@ Votes have a rating, which is taken into account, in this calculation:
 
 | Vote | Classification |
 | ---- | ----- |
-De 0 a 6 | Detrator
-De 7 a 8 | Passivo
-De 9 a 10 | Promotor
+De 0 a 6 | Detractor
+De 7 a 8 | Passive
+De 9 a 10 | Promoter
 
-As notas da classificação não são levadas em conta,
-no cálculo de NPS.
+The classification notes are not consider on the NPS calculation.
 
-A fórmula para calcular o NPS é a seguinte:
+The NPS formula is:
 
-<code>(Promotor - Detrator) / Total de Avaliações</code>
+<code>(Promoter - Detractor) / Total of Avaliations</code>
 
 <hr />
 
-Através desta aplicação, é possível fazer o cadastro
-de usuário (que seria um cliente), criar uma pesquisa,
-listar as pesquisas, fazer o envio de emails para
-que os clientes enviem sua nota e fazer o cálculo 
-de NPS.
+Through that application is possible to register
+a user (who would be a costumer), create a survey,
+list surveys, send emails to that costumers send 
+their note and make the calculation of NPS.
 
 ## 💻 Endpoints
 
-### 🧍 Usuários
+### 🧍 Users
 
-<b> POST <code>/users</code> </b> Criação de usuários
+<b> POST <code>/users</code> </b> Users creation
 
-Este endpoint precisa receber um nome e um email no
-corpo da requisição.
+This endpoint must receive a name and an email in
+the request body.
 
 ```node
-// Corpo da requisição
+// Request body
 {
-    name: "Débora",
-    email: "debora@gmail.com"
+    name: "Molinux",
+    email: "molinuxbr@gmail.com"
 }
 ```
 
 ```node
-// Retorno
+// Return
 {
     id: "39a3a2c9-1c33-415f-9ed0-3c8d6c3ba9f5",
-    name: "Débora",
-    email: "debora@gmail.com",
-    created_at: "2021-02-28T19:36:15.000Z"
+    name: "Molinux",
+    email: "molinuxbr@gmail.com",
+    created_at: "2021-04-14T19:36:15.000Z"
 }
 ```
 
 
 
-### 🔎 Pesquisas
+### 🔎 Surveys
 
 <b> GET <code>/surveys</code></b> Listar todas as pesquisas criadas
 
 ```node
-// Retorno
+// Return
 [
   {
     id: "c6d8506b-9881-43d6-9024-62ed21978fc0",
-    title: "Rocketseat",
-    description: "De 0 a 10, o quanto você recomendaria a Rocketseat?",
-    created_at: "2021-02-26T03:13:49.000Z"
+    title: "Molinux Corp",
+    description: "From 0 to 10, how much would you recommend Molinux Corp. ?",
+    created_at: "2021-04-14T03:13:49.000Z"
   },
   {
     id: "1f7f097c-5906-421e-8c3f-477798468e6b",
-    title: "Empresa X",
-    description: "De 0 a 10, o quanto você recomenda a Empresa X?",
-    created_at: "2021-02-26T03:17:27.000Z"
+    title: "X Corp.",
+    description: "From 0 to 10, how much would you recommend X Corp. ?",
+    created_at: "2021-04-14T03:17:27.000Z"
   }
 ]
 ```
